@@ -193,6 +193,44 @@ function onLoad() {
   document.getElementById('magic-window').addEventListener('click', function() {
     vrButton.requestEnterFullscreen();
   });
+
+
+
+
+  //mathematica object
+
+  var loader2 = new THREE.ObjectLoader();
+  loader2.load("13co_ok.json", function (obj) {
+      //add the loaded object to the scene
+
+
+      console.log('ci so 1')
+      obj.position.set(-0.9, controls.userHeight/2.3, 1.2);
+      obj.scale.set(2.3,2.3,2.3);
+      //obj.rotation.y += 30000 * 0.0004;
+
+      var material = new THREE.MeshLambertMaterial( {
+        color: "rgb(0,153,204)",
+        wireframe : false,   
+      });
+      
+      obj.traverse(
+        function(child) {
+          if(child instanceof THREE.Mesh) {
+                child.material = material;
+          }
+        } 
+      );
+
+      console.log('ci so 2')
+      scene.add(obj);
+      console.log('ci so 3')
+
+      },
+
+  );
+
+
 }
 
 function onTextureLoaded(texture) {
